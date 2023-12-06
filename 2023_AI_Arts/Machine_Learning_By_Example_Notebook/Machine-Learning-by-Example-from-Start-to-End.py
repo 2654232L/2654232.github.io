@@ -63,7 +63,7 @@
 # 
 # Check that your Python has version greater than 3.7 using the following code. This is what the code in the noteboook requires.
 
-# In[1]:
+# In[63]:
 
 
 import sys # importing the package sys which lets you talk to your computer system.
@@ -79,7 +79,7 @@ assert sys.version_info >= (3, 7) #versions are expressed a pair of numbers (3, 
 # 
 # In this case you will need to import `version` which is part of the `packaging` Python library. This allows you to extract/parse version numbers for Python packages/libraries like `sklearn`.
 
-# In[2]:
+# In[64]:
 
 
 from packaging import version #import the package "version"
@@ -92,7 +92,7 @@ assert version.parse(sklearn.__version__) >= version.parse("1.0.1")
 # 
 # The following code sets some font sizes to be used with `matplotlib.pyplot` (recall we used matplotlib in previous exercises to display visual information or data). You can set different sizes if you like, but too big and it won't look nice, too little and it will illegible. The code is intended to **prettify** your figures to look nicer.
 
-# In[3]:
+# In[65]:
 
 
 import matplotlib.pyplot as plt
@@ -108,7 +108,7 @@ plt.rc('ytick', labelsize=10) # the font size of labels for intervals marked on 
 # 
 # The code below creates the directory `images/classification` (if it doesn't already exist) and defines the `save_fig()` function which is used to save the figures you create in matplotlib in high resolution.
 
-# In[4]:
+# In[66]:
 
 
 from pathlib import Path
@@ -205,7 +205,7 @@ def save_fig(fig_id, tight_layout=True, fig_extension="png", resolution=300):
 # ### <span style="color:red">Step Three</span>
 # For predicting the median housing price, it would be useful to know the demographic of people living there, such as income and age. It would also be useful to know sizes of houses and what sort of things they have. For example, if a house had a pool or 6 bedrooms this would make the housing price a lot bigger.
 # 
-# Income of population could bias the data. If some people have a very high income but then there is a very low-income area in the district this could bias the data into predicting higher housing prices in the district. Also some houses could be very big but be in a very isolated and rural area of the district lowering its price, therefore affecting the average housing prices in the district.
+# Income of population could bias the data. If some people have a very high income but then there is a very low-income area in the district this could bias the data into predicting higher housing prices in the district. Also some houses could be very big but be in a very isolated and rural area of the district lowering its price, therefore affecting the average housing prices in the district. If the house is near the beach or near a lake or is in the city centre these also affect housing prices
 
 # # Working with Data
 # 
@@ -232,7 +232,7 @@ def save_fig(fig_id, tight_layout=True, fig_extension="png", resolution=300):
 # 
 # The following code defines **function** called `load_housing_data()`. This function retrieves a compressed file avaialable at `https://github.com/ageron/data/raw/main/housing.tgz` and saves it in a folder `datasets` which is in the same folder as this notebook. This will be created if it does not exist. The code will also extract the contents in the folder `datasets`. 
 
-# In[5]:
+# In[67]:
 
 
 from pathlib import Path
@@ -255,7 +255,7 @@ housing = load_housing_data() #runsthe function defined above
 
 # ### If you've already downloaded and extracted the compressed file - then the following is all you need
 
-# In[6]:
+# In[68]:
 
 
 import pandas as pd
@@ -266,7 +266,7 @@ housing = pd.read_csv(Path("datasets/housing/housing.csv"))
 
 # ## Take a Quick Look: housing data
 
-# In[7]:
+# In[69]:
 
 
 housing.info()
@@ -274,13 +274,13 @@ housing.info()
 
 # The result above tells you how many attributes (e.g. longitude, latitude) characterise the dataset. How many are there? The data type float64 is a numerical data type. So, the table above also tells you how many attributes are not numerical. 
 
-# In[8]:
+# In[70]:
 
 
 housing["ocean_proximity"].value_counts() # tells you what values the column for `ocean_proximity` can take
 
 
-# In[9]:
+# In[71]:
 
 
 housing.hist(bins=50, figsize=(12, 8))
@@ -290,7 +290,7 @@ plt.show()
 
 # Finally you can run `housing.describe()` to get a summay of the data set `housing`.
 
-# In[10]:
+# In[72]:
 
 
 housing.describe()
@@ -302,7 +302,7 @@ housing.describe()
 # 
 # In contrast to tabular data, image data sets are not always read in using pandas. Technically you can do this (as the line below commented out suggests) but as there are no features human-friendly features (such as, median income etc.) - only pixel information, it does not always help to load it as a pandas dataframe, unless the model requires it to be so. Use the command `type` to see what data type `mnist` is - you can see that it is not a `pandas.core.frame.DataFrame`. Dataframes are not the preferred **data structure** for image data.
 
-# In[11]:
+# In[73]:
 
 
 from sklearn.datasets import fetch_openml
@@ -317,7 +317,7 @@ mnist = fetch_openml('mnist_784', as_frame=False, parser='auto')
 
 # The command `mnist.info()` will not work here, to get information about the dataset content, because it is not a pandas dataframe. However, since your dataset is part of the `sklearn.datasets` universe, similar tools as those used in the previous lab exercises apply: for example, the keyword `DECSR` - as demonstrated in the first code cell below. The `print` command can be used in conjunction to get some useful context of the dataset structue and origin. 
 
-# In[12]:
+# In[74]:
 
 
 print(mnist.DESCR)
@@ -331,16 +331,15 @@ print(mnist.DESCR)
 # 
 # Write down the results in a markdown cell below. I have already created a markdown cell below - just double click to edit the content.
 
-# ***Mark Down cell for critique***
+# ## <span style="color:red">Task 2.3</span>
 # 
-# 1. 
-# 2.
-# 3.
-# 4.
+# Each image was 28x28
+# 
+# They separated the data into the training set with 60,000 examples and the test set with 10,000 examples. Used this way because it is good for people learning techniques and pattern recognition methods with minimal effort on preprocessing and formatting. I think it was justified because it was a lot easier to use and the images were clearer.
 
 # ### To see a full list of keys other than `DESCR` which is available to this dataset You can use the command `mnist.keys()` to see more keys available - run the code below.
 
-# In[13]:
+# In[75]:
 
 
 mnist.keys()
@@ -354,22 +353,23 @@ mnist.keys()
 # 
 # I have created a cell for you below with the data and target assigned to the **variables** `images` and `categories`. Add a line to print out the shape of the images and the list a assigned categories. Single click on the area to start editing. 
 
-# In[14]:
+# In[76]:
 
 
-# cell for python code 
+# Cell for Python code 
 
 images = mnist.data
 categories = mnist.target
 
-# insert lines below to print the shape of images and to print the categories.
+# Insert lines below to print the shape of images and to print the categories.
 
-
+print(images.shape)
+print(categories)
 
 
 # Let's take a look at one of the digits in the dataset - the first item.
 
-# In[15]:
+# In[77]:
 
 
 #extra code to visualise the image of digits
@@ -387,7 +387,7 @@ def plot_digit(image_data): # defines a function so that you need not type all t
     plt.axis("off") # ensures no x and y axes are displayed
 
 
-# In[16]:
+# In[78]:
 
 
 # visualise a selected digit with the following code
@@ -405,7 +405,7 @@ plt.show()
 # 
 # The dataset you are working with could be ordered in a specific way (for example, all the data points in a specific class all at the top). If you select a percentage of 20% from the top, you could get data points in only specific classes. By shuffling we can avoid this. As it happens `sklearn` has a nifty function to allow you to split the data inclusive of splitting. This function is called `train_test_split`. See it in action below, using the housing data.
 
-# In[17]:
+# In[79]:
 
 
 from sklearn.model_selection import train_test_split
@@ -420,7 +420,7 @@ train_set, test_set = train_test_split(housing, test_size=tratio, random_state=4
 # 
 # If the dataset is skewed so that it contains more samples of a specific kind more than others, sampling randomly will result in your test data not representing the population you would like to test. An example of the estimated probability of getting a bad sample that does not reflect the actual population is provided below. The US population ratio of females in the census is 51.1%. The following is the probability of getting a sample with less than 48.5% or greater than 53.5% females if you take a random sample withoput stratifying: approximately **10.71%** 
 
-# In[18]:
+# In[80]:
 
 
 # extra code – shows another way to estimate the probability of bad sample
@@ -440,7 +440,7 @@ samples = (np.random.rand(100_000, sample_size) < ratio_female).sum(axis=1)
 # 
 # The following code adds a column to the `housing` data to create bins of data according to interval brackets of median income of districts. This is a first step to creating a stratified sample across different income brackets.
 
-# In[19]:
+# In[81]:
 
 
 import numpy as np
@@ -453,7 +453,7 @@ housing["income_cat"] = pd.cut(housing["median_income"],
 
 # The following code uses the above bins to implement startified sampling - that is, it will randomly sample 20% (because we set test ratio `tratio` to 0.2) from each income bracket defined above.
 
-# In[20]:
+# In[82]:
 
 
 from sklearn.model_selection import train_test_split
@@ -465,7 +465,7 @@ strat_train_set, strat_test_set = train_test_split(housing, test_size=tratio, st
 
 # The code below prints out the proportion of each income category in the stratified test set above.
 
-# In[21]:
+# In[83]:
 
 
 strat_test_set["income_cat"].value_counts() / len(strat_test_set) #Prints out in order of the highest proportion first.
@@ -475,21 +475,13 @@ strat_test_set["income_cat"].value_counts() / len(strat_test_set) #Prints out in
 # 
 # Discuss with your peer group, why a stratified sample based on median income is reasonable. Create a markdown cell below to report on the results of the discussion. I have already create one below, so just double click to edit.
 
-# ***Markdown cell***
+# ## <span style="color:red">Task 3.1</span>
 # 
-# 1. 
-# 2. 
-# 3.
-# 4.
-# 
+# 1. Stratified better than random samples because each group of income is properly represented
+# 2. Stratified is more precise
+# 3. Stratified is more reasonable because it takes each group into account, we want the data to represent the population of the district fairly.
 
-# In[ ]:
-
-
-
-
-
-# In[22]:
+# In[84]:
 
 
 type(mnist.data)
@@ -504,7 +496,7 @@ type(mnist.data)
 # 
 # It is machine learning convention to use upper case `X` for variable names associated with data and lower case `y` in the variable names associated to labels (or categories/classes).
 
-# In[23]:
+# In[85]:
 
 
 X_train = mnist.data[:60000]
@@ -530,7 +522,7 @@ y_test = mnist.target[60000:]
 # 
 # To do this use the following code.
 
-# In[24]:
+# In[86]:
 
 
 housing = strat_train_set.copy()
@@ -544,7 +536,7 @@ housing = strat_train_set.copy()
 # 
 # We can take a look at correlations for `median_house_value` by using that feature name in a square bracket (**with quotation marks!**). the last part `sort_values(ascending=False)` sorts the correlation to display it in descending order of correlation (that is, most correlated fetures are listed first).
 
-# In[25]:
+# In[87]:
 
 
 corr_matrix = housing.corr(numeric_only=True) # argument is so that it only calculates for numeric value features
@@ -555,7 +547,7 @@ corr_matrix["median_house_value"].sort_values(ascending=False)
 # 
 # Pandas also can visualise these correlations as a graph for you. In the code below, we have selected four features (see the variable with that name), to 4 x 4 grid of graphs.
 
-# In[26]:
+# In[88]:
 
 
 from pandas.plotting import scatter_matrix
@@ -575,7 +567,7 @@ plt.show()
 # 
 # In any machine learning task, you need to provide the data and the target Label separately to the machine learning algorithm. Otherwise, they have no way of knowing which of the features is the target label. In our scenario, the label for the housing data is the `median_house_value`. When your data is in a padas dataframe format, you can simply 1) drop the column with the label to get the data, and, 2) get the column for the target label, to get the labels.
 
-# In[27]:
+# In[89]:
 
 
 housing = strat_train_set.drop("median_house_value", axis=1) ## 1)
@@ -589,9 +581,9 @@ housing_labels = strat_train_set["median_house_value"].copy() ## 2)
 # - Running the code will show the total number of entries. By comparing that number to the number of Non-Null entries for each feature (e.g. `total_bedrooms`) you can see whether there are missing values. 
 # - If there are no missing values, these numbers should be the same!
 # 
-# How many values are missing for the number of `total_bedrooms'? 
+# How many values are missing for the number of `total_bedrooms'? <span style="color:red">168 missing entries</span>
 
-# In[28]:
+# In[90]:
 
 
 housing.info()
@@ -607,7 +599,7 @@ housing.info()
 # 
 # Depending on which approach you take, the performance of your AI could be different. Also, note that, **with Option 1, you will have to remove the corresponding rows in `housing_labels` before using these in a machine learning task**. Following are codes from each of these approaches. Read the comments included in the code for understanding what each cell is doing.
 
-# In[29]:
+# In[91]:
 
 
 # this is the code for Option 1 above. 
@@ -618,7 +610,7 @@ housing_option1.dropna(subset=["total_bedrooms"], inplace=True)  # option 1 - dr
 housing_option1.info() #look for missing values after rows have been dropped
 
 
-# In[30]:
+# In[92]:
 
 
 housing_option2 = housing.copy() #This makes a copy of the data to variable housing_option1, so that we don't mess up the original data.
@@ -628,7 +620,7 @@ housing_option2.drop("total_bedrooms", axis=1, inplace=True)  # option 2 - dropp
 housing_option2.info() # checking for missing values in the new data after column has been dropped
 
 
-# In[31]:
+# In[93]:
 
 
 housing_option3 = housing.copy() #This makes a copy of the data to variable housing_option1, so that we don't mess up the original data.
@@ -641,7 +633,7 @@ housing_option3.info()
 
 # #### You can also use `SimpleImputer` from the `sklearn.impute` library to fill missing values with the median
 
-# In[32]:
+# In[94]:
 
 
 from sklearn.impute import SimpleImputer
@@ -661,7 +653,7 @@ housing_num[:] = imputer.transform(housing_num) # the imputer uses the median to
 # 
 # Test this with he **min** and **max** values after running the pandas `describe()` function. Code below.
 
-# In[33]:
+# In[95]:
 
 
 housing_num.describe()
@@ -669,7 +661,7 @@ housing_num.describe()
 
 # You can see that all the features have very different ranges. Bringing these in alignment is called **feature scaling**. There are a number of ways to scale features. Scikit-Learn provides something called MinMaxScaler which scales the values to fit into a range defined by you. Below, the code is provided for when you are fitting it into the range from -1 to 1. AI algorithms often like the mean to be placed at zero, so best to set a range with zero as the mid point value. 
 
-# In[34]:
+# In[96]:
 
 
 from sklearn.preprocessing import MinMaxScaler # get the MinMaxScaler
@@ -680,7 +672,7 @@ housing_num_min_max_scaled = min_max_scaler.fit_transform(housing_num)# use the 
 
 # Alternatively, Scikit-Learn also provides a method called StandardScaler. This method tries normalise the distributional characteristics by considering mean and standard deviation for each feature, and normalising the values to have standard deviation 1. But, even without knowing the mathematical details, we can simply employ the tools provided by `sklearn` - example below.
 
-# In[35]:
+# In[97]:
 
 
 from sklearn.preprocessing import StandardScaler
@@ -689,7 +681,7 @@ std_scaler = StandardScaler()
 housing_num_std_scaled = std_scaler.fit_transform(housing_num)
 
 
-# In[36]:
+# In[98]:
 
 
 housing_num[:]=std_scaler.fit_transform(housing_num)
@@ -699,7 +691,7 @@ housing_num[:]=std_scaler.fit_transform(housing_num)
 # 
 # In the first instance we will use the data resulting from the `SimpleImputer` (with the **median** as a strategy) and use   `StandardScaler` for scaling the features. Before we train the Linear Regression model for predicting median housing prices for districts, we need to also apply the scaling to the target labels (in our case, the known median housing prices). The code is provided below.
 
-# In[37]:
+# In[99]:
 
 
 from sklearn.preprocessing import StandardScaler #This line is not necessary if you ran this prior to running this cell. 
@@ -711,7 +703,7 @@ scaled_labels = target_scaler.fit_transform(housing_labels.to_frame()) #calculat
 
 # ### Training Step
 
-# In[38]:
+# In[100]:
 
 
 from sklearn.linear_model import LinearRegression #get the library from sklearn.linear model
@@ -725,7 +717,7 @@ model.fit(housing_num, scaled_labels)
 #predictions = target_scaler.inverse_transform(scaled_predictions)
 
 
-# In[39]:
+# In[101]:
 
 
 some_new_data = housing_num.iloc[:5] #pretend this is new data
@@ -735,13 +727,13 @@ scaled_predictions = model.predict(some_new_data)
 predictions = target_scaler.inverse_transform(scaled_predictions)
 
 
-# In[40]:
+# In[102]:
 
 
 print(predictions, housing_labels.iloc[:5])
 
 
-# In[41]:
+# In[103]:
 
 
 # extra code – computes the error ratios discussed in the book
@@ -978,7 +970,6 @@ print(accuracy)
 # 
 # Before you go, let's play a little bit more with Neural Networks. There is an excellent online resource for this. Go to [playground.tensorflow.org](https://playground.tensorflow.org/). A screenshot is provided below should it help to verify that you have navigated to the right place!
 # 
-# ![Tensorflow Playground Screenshot](attachment:tensorflow_playground.png "Tensorflow Playground")
 # 
 # Change your data type to "spiral" by clicking on the picture for spiral data on the lefthand side. 
 # - The idea is that the point of orange colour is one class and the ones of blue colour is another class. 
@@ -997,12 +988,22 @@ print(accuracy)
 # 
 # Markdown cells have been included below for addressing the discussions in Task 5. This is for your convenience - modify as you see fit.
 
-# **Markdown cell for Task 5**
+# ## <span style="color:red">Task 5.1</span>
 # 
-# 1. 
-# 2.
-# 3. 
+# 1. For my code if I was using my own data I would need to get my own datasets and download them. I would also need to set aside my test data by using stratified sampling. 
+# 2. For the code if I was changing the model I would need to import the correct model I wanted to use and train my data to that model.
+# 3. If I was changing my scaling method I would use StandardScaler. I would create an instance of StandardScaler and use .fit_transform to scale.
+# 4. If I was changing my approach to missing data I would need to pick one of the options to choose. I could choose the option of getting rid of the feature that has missing data, I would need to use 'drop' in my code to get rid of the label.
+# 5. Cross validation is important because it is needed to make sure predictions of the model's performance are good before you move onto the test data. Cross validation prevents overfitting your data to the model.
 # 
+# ## <span style="color:red">Task 5.2.1</span>
+# 
+# ![Image of my best model](images/tensorflow_best_model.png)
+# 1 hidden layer, 287 epochs, 4 features. Training loss was 0.173.
+# 
+# ## <span style="color:red">Task 5.2.2</span>
+# 
+# In my model: in the 1st neuron it seems to learning that the top part of the spiral is orange and is predicting there is a blue section in the middle. in the 2nd neuron it seems to be learning that the top and bottom sections are orange and either side is blue. in the 3rd neuron it's learning that the top part is orange and the bottom is blue. In the 4th and 5th neuron it is learning that the middle part has orange and the rest has blue. In the final output it has a pretty good prediction of the pattern.
 
 # ## Task 5-3 (Optional): Pre-trained Models
 # 
