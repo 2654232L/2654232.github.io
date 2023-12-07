@@ -52,23 +52,23 @@
 # 
 # ## <span style="color: red;">Task 2b</span>
 # 
-# ![Screenshot of Sample of Model](images\kaggle1.png)
+# ![Screenshot of Sample of Model](AI_Ethics\images\kaggle1.png)
 # This screenshot shows the sample of the model, and how it works. It classifies comments into 'Toxic' or 'Non Toxic'
 # 
-# ![Screenshot of Accuracy of Model](images\kaggle2.png)
+# ![Screenshot of Accuracy of Model](AI_Ethics\images\kaggle2.png)
 # This screenshot shows the calculated accuracy of the model
 # 
-# ![Screenshot of Toxic Comment](images\kaggle3.png)
+# ![Screenshot of Toxic Comment](AI_Ethics\images\kaggle3.png)
 # This screenshot shows the calculated accuracy of the model
 # 
-# ![Screenshot of Non Toxic Comment](images\kaggle4.png)
+# ![Screenshot of Non Toxic Comment](AI_Ethics\images\kaggle4.png)
 # This screenshot shows the calculated accuracy of the model
 # 
-# ![Screenshot of Toxic Words](images\kaggle5.png)
+# ![Screenshot of Toxic Words](AI_Ethics\images\kaggle5.png)
 # This screenshot shows the list of toxic words in the model.
 # 
-# ![Screenshot of Accuracy of Model](images\kaggle6.png)
-# ![Screenshot of Accuracy of Model](images\kaggle7.png)
+# ![Screenshot of Accuracy of Model](AI_Ethics\images\kaggle6.png)
+# ![Screenshot of Accuracy of Model](AI_Ethics\images\kaggle7.png)
 # Shows the bias in the model. This is biased because it says that some identities are toxic whilst others are not.
 # 
 # ### <span style="color: red;">From Exericse 5:</span>
@@ -122,7 +122,7 @@
 # 
 # When using the word engineer, the closest words are engineers, engineering, scientist, and designer. These are all relevant words. I have not seen any gender bias, this is probably because engineer is a gender neutral name for an occupation. Speaking with peers they also think the same thing.
 # 
-# ![Screenshot of Embedding projector on the word engineer](images\embeddingprojector_engineer.png)
+# ![Screenshot of Embedding projector on the word engineer](AI_Ethics\images\embeddingprojector_engineer.png)
 # #### Screenshot from https://projector.tensorflow.org/
 
 # # Task 4: Thinking about AI Fairness 
@@ -146,12 +146,48 @@
 # 
 # Report the results of the activity and discussion by modifying the markdown cell below.
 
-# **Markdown cell for discussing fairness**
+# ## <span style="color: red;">Task 4a</span>
 # 
-# 1. 
+# Four fairness criteria are described on the page.
+# I didn't know the names of any of the fairness criteria, I recognised the method of equal oppurtunity and demographic parity but was unaware of the names.
+# I did not know any other types of fairness criteria.
 # 
-# 2. 
+# ## <span style="color: red;">Task 4b</span>
 # 
+# ![Screenshot of first 5 lines of dataset](AI_Ethics\images\kagglefairness1.png)
+# This screenshot shows the first five lines of the dataset for the credit card approval model
+# 
+# ![Screenshot of descriptions of dataset](AI_Ethics\images\kagglefairness2.png)
+# This photo describes what each of the headings mean on the dataset.
+# 
+# ![Screenshot of results of the model](AI_Ethics\images\kagglefairness3.png)
+# ![Screenshot of group a confusion matrix](AI_Ethics\images\kagglefairness4.png)
+# ![Screenshot of group b confusion matrix](AI_Ethics\images\kagglefairness5.png)
+# These screenshots show the results of the model and how many approvals were given. The photos show the confusions matrices for Group A and for Group B.
+# 
+# ![Screenshot of fairness criteria in the model](AI_Ethics\images\kagglefairness6.png)
+# This photo shows how all the fairness criteria is in favor of Group B. And shows that if you are in group A and should be approved that your chances of actually being approved are very low.
+# 
+# ![Screenshot of Flowchart of how model works](AI_Ethics\images\kagglefairness7.png)
+# This photo shows the flowchart which depicts how the model for credit card approvals works.
+# 
+# ![Screenshot describing how the flowchart works](AI_Ethics\images\kagglefairness8.png)
+# This photo describes how the flowchart work and how the model decides whether to approve or deny a credit card.
+# 
+# ![Screenshot of description of unfairness in the model](AI_Ethics\images\kagglefairness9.png)
+# This photo describes the source of unfairness in the model, which is that group a and group b are not treated fairly and are not treated equally.
+# 
+# ![Screenshot of new model](AI_Ethics\images\kagglefairness10.png)
+# Shows a new version of the model in hopes of making it more fair.
+# 
+# ![Screenshot of descriptions of new results of model](AI_Ethics\images\kagglefairness11.png)
+# Describes how the new model has dropped in accuracy. The new model is still biased towards group B, but in terms of equal oppurtunity and accuracy, it is now in favor of group A.
+# 
+# ![Screenshot of third model and its results](AI_Ethics\images\kagglefairness12.png)
+# This photo shows a third model and its results. 
+# 
+# ![Screenshot of evaluation of results of third model](AI_Ethics\images\kagglefairness13.png)
+# This photo evaluates the results of the third model. There is an overall drop in accuracy but the two groups are more close. This model is overall more fair than the others for demographic parity, but is more biased in favor of group A for equal oppurtunity and accuracy.
 
 # # Task 5: AI and Explainability
 # 
@@ -177,6 +213,32 @@
 # - Can you think of any examples where this would have issues? 
 # - Discuss these questions in your notebook - describe your example, if you have any, and discuss the issues. 
 
+# ## <span style="color: red;">Task 5a</span>
+# 1. There are seven features of this dataset. Only five features are used in the first dataset.
+# 2. Results were not different to what I expected. Distance was the most important factor I thought of to begin with and this was the most important feature in the end for calculating taxi fares.
+# 
+# #### <span style="color: red;">Question 1</span>
+# Which features are useful for predicting taxi fares? I think all of the latitude and longitude data used in this model are useful. It needs to be known where the taxi is being picked up and dropped off to work out the distance and therefore the taxi fare. I do not think the passenger number is useful because that is not normally used in working out taxi fare.
+# 
+# #### <span style="color: red;">Question 2</span>
+# ![picture of my answer for question 2](AI_Ethics\images\permutationimportance_question2.png)
+# 
+# #### <span style="color: red;">Question 3</span>
+# Latitude may matter more because the latitude is more likely to change at a greater value than the longitude values. Latitude may also be worth more in taxi fares in the area.
+# 
+# #### <span style="color: red;">Question 4</span>
+# ![picture of my code for question 4](AI_Ethics\images\permutationimportance_question4.png)
+# 
+# #### <span style="color: red;">Question 5</span>
+# The scale of the features does not affect permuation importance in this model. The absolute change features here have high importance because they are the total distance travelled which is the most important factor in determining taxi fares.
+# 
+# #### <span style="color: red;">Question 6</span>
+# We cannot tell from permuation importance results whether lat or longitude distance is more expensive. latitude distancs tend to be larger so that is why it could be more expensive.
+# 
+# ## <span style="color: red;">Task 5b</span>
+# I think permuation importance is a good indicator of feature importance.
+# There could be a problem if features have a strong correlation. This can come up with unlikely data instances. (Source: https://christophm.github.io/interpretable-ml-book/feature-importance.html).
+
 # # Task 6: Further Activities for Broader Discussion
 # 
 # Apart from the [**Jigsaw Toxic Comment Classification Challenge**](https://www.kaggle.com/datasets/julian3833/jigsaw-toxic-comment-classification-challenge) another challenge you might explore is the [**Inclusive Images Challenge**](https://www.kaggle.com/c/inclusive-images-challenge). Read at least one of the following.
@@ -190,7 +252,10 @@
 # 
 # - You are welcome to carry out the rest of the [Kaggle course on Intro to AI Ethics](https://www.kaggle.com/learn/intro-to-ai-ethics) to see some ideas from the Kaggle community. 
 # - You are welcome to carry out the rest of the [Kaggle tutorial on explainability]( https://www.kaggle.com/learn/machine-learning-explainability) but these are a bit more technical in nature.
-# - 
+
+# ## <span style="color: red;">Task 6</span>
+# What problems could arise from these tasks attempted with the Jigsaw dataset on toxicity?
+# In the PULSE controversy there was a picture that turned Obama white. This shows the bias AI has that has been ingrained since the beginning. This controversy has shown the racial bias in AI. This is similar to the Jigsaw comment toxicity where there was racial bias in the comments, where it said 'I have a white friend' was labelled non-toxic but 'I have a black friend' was labelled as toxic. It appeared that PULSE was generating more pictures of white people than faces of people of colour.
 
 # # Summary
 # 
